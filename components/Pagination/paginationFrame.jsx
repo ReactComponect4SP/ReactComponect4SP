@@ -15,7 +15,8 @@ export default class PaginationFrame extends React.Component {
             currentItems:null,
             tempTotalItems:null,
             tempPageSize:this.props.config.pageSize,
-            itemsToDo:''
+            itemsToDo:'',
+            tempBackCount:this.props.config.totalCount
         };
     }
 
@@ -23,7 +24,8 @@ export default class PaginationFrame extends React.Component {
         let listData = this.props.config.data.slice(0,this.state.tempPageSize);
         this.setState({
             currentItems:listData,
-            tempTotalItems:this.props.config.data
+            tempTotalItems:this.props.config.data,
+
         })
     }
 
@@ -166,7 +168,8 @@ export default class PaginationFrame extends React.Component {
             reactThis.setState(
                 {currentItems:dataInput.allItem.slice(0,reactThis.state.tempPageSize),
                  tempTotalItems:dataInput.allItem,   
-                 nowPage:1}
+                 nowPage:1,
+                tempBackCount:dataInput.allItem.length}
             );
         }).fail(function(){
 
@@ -275,8 +278,7 @@ export default class PaginationFrame extends React.Component {
             selectItems:this.getToDoItems.bind(this)
         });
 
-       // let totalcount = this.props.dataInBack?this.props.config.totalCount:this.state.tempTotalItems.length;
-       let totalcount = this.state.tempTotalItems.length;
+        let totalcount = this.props.dataInBack?this.props.config.totalCount:this.state.tempTotalItems.length;
         child = hasLetterSearch?<LetterSearchFrame letterSearch={this.letterFun.bind(this)}>{child} </LetterSearchFrame>:child;
 
         let turningPanel = hasTurning?<PaginationArrows turnPage={this.turnPage.bind(this)} currentPage={currentpage} countInPage={this.state.tempPageSize} totalCount={totalcount}></PaginationArrows>:null;
