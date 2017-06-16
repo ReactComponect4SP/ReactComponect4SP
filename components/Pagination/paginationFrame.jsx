@@ -159,13 +159,13 @@ export default class PaginationFrame extends React.Component {
         // });
         var tempConfig = this.props.config , reactThis = this;
         var filterObj={
-            PageNo: pageCount,
+            PageNo: 1,
             PageSize: tempConfig.pageSize
         };
-        $.when(AvePointSocialRequest.GetSharedDocument(pageCount, tempConfig.pageSize, condition)).done(function(data){
+        $.when(AvePointSocialRequest.GetSharedDocument(1, tempConfig.pageSize, condition)).done(function(dataInput){
             reactThis.setState(
-                {currentItems:dataInput.slice(0,this.state.tempPageSize),
-                 tempTotalItems:dataInput,   
+                {currentItems:dataInput.allItem.slice(0,reactThis.state.tempPageSize),
+                 tempTotalItems:dataInput.allItem,   
                  nowPage:1}
             );
         }).fail(function(){
