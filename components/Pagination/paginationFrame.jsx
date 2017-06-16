@@ -275,7 +275,8 @@ export default class PaginationFrame extends React.Component {
             selectItems:this.getToDoItems.bind(this)
         });
 
-        let totalcount = this.props.dataInBack?this.props.config.totalCount:this.state.tempTotalItems.length;
+       // let totalcount = this.props.dataInBack?this.props.config.totalCount:this.state.tempTotalItems.length;
+       let totalcount = this.state.tempTotalItems.length;
         child = hasLetterSearch?<LetterSearchFrame letterSearch={this.letterFun.bind(this)}>{child} </LetterSearchFrame>:child;
 
         let turningPanel = hasTurning?<PaginationArrows turnPage={this.turnPage.bind(this)} currentPage={currentpage} countInPage={this.state.tempPageSize} totalCount={totalcount}></PaginationArrows>:null;
