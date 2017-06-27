@@ -53,7 +53,7 @@ export default class ArticlesSearchFrame extends React.Component{
         this.refs.popular.className = 'acs-searchpanel-tabbtn';
         if(condition === 'Latest'){
             this.refs.latest.className = 'acs-searchpanel-tabbtn acs-searchpanel-tabselect';
-           global.articleType = "Created";
+           global.articleType = "ACSArticleDate";
         }
         else{
             this.refs.popular.className = 'acs-searchpanel-tabbtn acs-searchpanel-tabselect';
