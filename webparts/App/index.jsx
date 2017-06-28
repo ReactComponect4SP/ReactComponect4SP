@@ -37,7 +37,7 @@ function appRender(params) {
         var dtd = $.Deferred();
         var waitDialog = SP.UI.ModalDialog.showWaitScreenWithNoClose("Saving...");
         $.ajax({
-            url: _spPageContextInfo.siteAbsoluteUrl + '/_vti_bin/APPSSP13MeetingRoom/WorkspaceService.svc/UpdateAppInfos',
+            url: _spPageContextInfo.siteAbsoluteUrl + '/_vti_bin/APPSSP13Workspace/WorkspaceService.svc/UpdateAppInfos',
             headers: {
                 "Accept": "application/json;odata=verbose",
                 "Content-Type": "application/json;odata=verbose",

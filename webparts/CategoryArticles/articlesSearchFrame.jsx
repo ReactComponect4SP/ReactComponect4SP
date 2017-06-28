@@ -174,7 +174,7 @@ export default class ArticlesSearchFrame extends React.Component{
             });
         });
 
-        global.articleType = "Created";
+        global.articleType = "ACSArticleDate";
         global.searchTitle = "";
 
         return (<div>
