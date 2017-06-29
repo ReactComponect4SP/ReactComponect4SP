@@ -78,7 +78,8 @@ export default class Display extends React.Component {
     render() {
         return (<div>
             <Gallery children={this.state.myData} type="remove" addcallback={this.addcallback.bind(this)} removecallback={this.removecallback.bind(this)} 
-            drop={this.drop.bind(this)} dragstartcallback={this.dragstartcallback.bind(this)} dragendcallback={this.dragendcallback.bind(this)} title="My Favorite Apps"/>
+            drop={this.drop.bind(this)} dragstartcallback={this.dragstartcallback.bind(this)} dragendcallback={this.dragendcallback.bind(this)} title="My Favorite Apps"
+            description='Personlise your favourite apps by:</br>- Click "+" sign on selected apps in all apps list below</br>- Click "Save" button to save the changes'/>
             <Gallery children={this.state.workingData} type="display" addcallback={this.addcallback.bind(this)} removecallback={this.removecallback.bind(this)} title="My Working Apps"/>
             <Gallery children={this.state.allData} type="add" addcallback={this.addcallback.bind(this)} removecallback={this.removecallback.bind(this)} 
             drop={this.drop.bind(this)} dragstartcallback={this.dragstartcallback.bind(this)} dragendcallback={this.dragendcallback.bind(this)} title="All Apps"/>

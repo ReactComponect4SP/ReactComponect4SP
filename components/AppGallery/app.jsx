@@ -53,7 +53,7 @@ export default class APP extends React.Component {
         return (<a className='acs-app-item' draggable={this.candrag} onDragStart={this.dragstart.bind(this, id,type)} 
                      onDragEnd={this.dragend.bind(this, type)} onSelect={this.select.bind(this)} href={href}>
                 {this.renderImg(src, title)}
-                <span>{title}</span>   
+                <span title={title}>{title}</span>   
                 {addition}             
         </a>);
     }

@@ -57,12 +57,18 @@ export default class DisplayGallery extends React.Component {
     render() {
         var items = this.renderItems();
         var className = 'acs-appgallery';
+        var descriptionItem = "";
+        if(this.props.description){
+            descriptionItem = <div className="acs-appgallery-description" dangerouslySetInnerHTML={{__html: this.props.description}}></div>;
+        }
+        var galleryTitleClassName = this.props.description == null? "acs-appgallery-title":"acs-appgallery-title nobottom";
         if(this.props.type == "display"){    
             className += ' display';          
             return (<div className={className}>
                 <div className="acs-appgallery-header">
                     <div className="acs-appgallery-icon"></div>
-                    <div className="acs-appgallery-title">{this.props.title}</div>
+                    <div className={galleryTitleClassName}>{this.props.title}</div>
+                    {descriptionItem}
                 </div>
                 {items}
             </div>);
@@ -70,14 +76,16 @@ export default class DisplayGallery extends React.Component {
         else if(this.props.type == "add"){
             className += ' add';
              return (<div className={className} onDragOver={this.dragover.bind(this)} onDragEnter={this.dragenter.bind(this)} onDrop={this.drop.bind(this)}>
-                <div className="acs-appgallery-title">{this.props.title}</div>
+                <div className={galleryTitleClassName}>{this.props.title}</div>
+                {descriptionItem}
                 {items}
             </div>); 
         }
         else{
             className += ' remove';
             return (<div className={className} onDragOver={this.dragover.bind(this)} onDragEnter={this.dragenter.bind(this)} onDrop={this.drop.bind(this)}>
-                <div className="acs-appgallery-title">{this.props.title}</div>
+                <div className={galleryTitleClassName}>{this.props.title}</div>
+                {descriptionItem}
                 {items}
             </div>);
         }
