@@ -43,7 +43,6 @@
             left: 0;
             margin: 10px 0 0 0 !important;
             padding: 0px !important;
-            height: 300px;
             flex-wrap: nowrap;
 
             > li {
@@ -55,18 +54,19 @@
 
                 > a {
                     float: left;
-                    width: 100px;
-                    height: 100px;
+                    width: 32%;
+                    height: 0px;
                     text-decoration: none;
                     border-radius: 4px;
                     margin-top: 4px;
                     text-align: center;
                     position: relative;
 					overflow: hidden;
+					padding-bottom: 32%;
 					
                     .acs-linkitem-img {
                         width: 100%;
-                        height: 100%;
+                        height: auto;
                     }
 					.acs-linkitem-label {
 						position: absolute;
@@ -154,8 +154,8 @@
                 }
 
                 > a:nth-child(3n+2) {
-                    margin-left: 5px;
-                    margin-right: 5px;
+                    margin-left: 1%;
+                    margin-right: 1%;
                 }
             }
         }

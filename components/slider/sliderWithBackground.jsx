@@ -27,7 +27,10 @@ export default class SliderPicsWithBackground extends React.Component {
                     <div className="acs-slider-pic-back">
                         <img src={item.src} />
                     </div>
+                    <div className="acs-slider-pic-placeholder">
+                    </div>
                 </div>
+                {panel}
             </li>;
         });
 
