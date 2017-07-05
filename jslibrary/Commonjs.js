@@ -97,9 +97,11 @@ var AIC;
     };
 
     function changeStyle() {
-        $('#contentBox').prepend($('#titleAreaRow>div:nth-child(2) .ms-breadcrumb-dropdownBox').prop("outerHTML"));
-        $('#titleAreaRow>div:nth-child(2)').css('display','none');
+        $('#titleAreaRow > div:nth-child(2)').css('display','none');
+        $('#contentBox').prepend($('#titleAreaRow > div:nth-child(2) .ms-breadcrumb-dropdownBox').prop("outerHTML"));
         $('#siteIcon').after('<div id="navigation" class="ms-breadcrumb-box ms-tableCell ms-verticalAlignTop"></div>');
+        $('#DeltaTopNavigation').parent().html('');
+        
         var config = { url: _spPageContextInfo.siteAbsoluteUrl + "/_layouts/15/APPSAICSolution/NavigationProvider.aspx" }
         window.NavigationRender(config);
 
