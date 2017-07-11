@@ -23,7 +23,7 @@ export default class SingleArticle extends React.Component{
         return (
             <ArticleTitle title={dataItem.Title} width={itemWidth} hasTitle={hasTitle} color={dataItem.TitleColor} partUrl={dataItem.colleUrl} ArticleTitleIconUrl={dataItem.ArticleTitleIconUrl}> 
                 <div onClick={this.openItem.bind(this,dataItem.ItemUrl)} style={{heigh:"auto"}}>
-                    <ArticlePicture picturePath={dataItem.PicturePath}></ArticlePicture>
+                    <ArticlePicture picturePath={dataItem.PicturePath} hasTitle={hasTitle}></ArticlePicture>
                     <div className="asc-article-content">
                         <ArticleHeadline headline={dataItem.Headline}></ArticleHeadline>
                         {intro}

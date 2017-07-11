@@ -4,10 +4,10 @@ export default class ArticlePicture extends React.Component {
     }
 
     render() {
-        let { picturePath } = this.props;
+        let { picturePath, hasTitle } = this.props;
 
         return (
-                <div className={"acs-articleframe-picture"}>
+                <div className={hasTitle?"acs-articleframe-picturesingle":"acs-articleframe-picture"}>
                     <img src={picturePath}></img>
                 </div>
         );
