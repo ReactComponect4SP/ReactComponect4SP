@@ -11,33 +11,38 @@
             font-size: 14px;
             color: #888;
             width: 100%;
+            
+            &>div:nth-child(1){
+                margin-top: 10px;
+            }
 
             .acs-collapse-icon{
-                width: 9px;
-                height: 9px;
+                width: 18px;
+                height: 18px;
                 margin-left: 15px;
                 background-image:@bgimage_path; 
-                background-position: -5px -310px;
+                background-position: -180px 0;
                 vertical-align: middle;
                 display: inline-block;
                 cursor: pointer;
             }
             .acs-collapse-icon.in{
-                background-position: -22px -310px;
+                background-position: -162px 0;
             }
 
-            .acs-collapse-title{
-                margin-top: 10px;                
+            .acs-collapse-title{               
                 margin-left: 10px;
                 display: inline-block;
                font-family: "Open Sans Semibold","Open Sans", "Sans-serif";
                text-transform: uppercase;
                font-weight: bold;
                cursor: pointer;
+               line-height: 30px;
+                vertical-align: middle;
             }
 
             .acs-collapse-description{
-                margin-left: 30px;
+                margin-left: 42px;
                 font-size: 13px;
                 color: #888;
                 margin-bottom: 10px;
@@ -58,7 +63,7 @@
                 .acs-tablebulk-serviceitem{
                     float: left;
                     margin-bottom: 10px;
-                    width: 200px;
+                    width: 100%;
 
                     .acs-serviceitem-itemicon{
                         display: inline-block;
@@ -76,6 +81,8 @@
                         color: #000;
                         font-size: 13px;
                         font-family: "Open Sans", "Sans-serif";
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
             }
@@ -86,7 +93,7 @@
 
 .acs-tagPage{
     .acs-section-panel{
-        height: 50px;
+        height: auto;
         width: 100%;
         background: rgb(242, 244, 246);
         margin-bottom: 30px;
@@ -98,21 +105,52 @@
             }          
         }
         .acs-tabpage-title{
-            background-color: transparent;
+            background-color: #f2f4f6;
             .acs-tabpage-title-content{
-                color: #000;
+                color: #333333;
             }          
+        }
+        &>div:nth-child(2){
+            .acs-tabpage-title-icon{
+                background-position: 0 -114px;
+            }
+        }
+        &>div:nth-child(2).acs-tabpage-title-active{
+            .acs-tabpage-title-icon{
+                background-position: 0 -88px;
+            }
+        }
+        &>div:nth-child(1){
+            .acs-tabpage-title-icon{
+                background-position: -26px -114px;
+            }
+        }
+        &>div:nth-child(1).acs-tabpage-title-active{
+            .acs-tabpage-title-icon{
+                background-position: -26px -88px;
+            }
+        }
+        &>div:nth-child(3){
+            .acs-tabpage-title-icon{
+                background-position: -52px -114px;
+            }
+        }
+        &>div:nth-child(3).acs-tabpage-title-active{
+            .acs-tabpage-title-icon{
+                background-position: -52px -88px;
+            }
         }
         .acs-tabpage-title,.acs-tabpage-title-active{
             display: inline-block;
-            width: 150px;     
+            width: 100%;     
             cursor: pointer;
+            border-right: 2px solid #fff;
+            text-align: center;
             .acs-tabpage-title-icon{
-                width: 26px;
-                height: 26px;
-                margin-left: 20px;
+                width: 20px;
+                height: 20px;
+                margin-left: 10px;
                 background-image:@bgimage_path; 
-                background-position: -260px -37px;
                 vertical-align: middle;
                 line-height: 50px;
                 display: inline-block;
@@ -124,8 +162,37 @@
                 font-weight: bold;
                 line-height: 50px;
                 font-family: "Open Sans Semibold","Open Sans", "Sans-serif";
+                margin-right: 10px;
             }
         }
     }
+}
 
+@media (min-width:769px){
+    .acs-tagPage{
+        .acs-section-panel{
+            height: 50px;
+            .acs-tabpage-title,.acs-tabpage-title-active{
+                width: 200px;
+                text-align: inherit;
+                .acs-tabpage-title-icon{
+                    margin-left: 20px;
+                }
+                .acs-tabpage-title-content{
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+    .acs-collapse{
+        .acs-collapse-tab{ 
+            .acs-collapse-content{ 
+                .acs-tablebulk-mutilist{ 
+                    .acs-tablebulk-serviceitem {
+                        width: 200px;
+                    }
+                }
+            }
+        }
+    }
 }

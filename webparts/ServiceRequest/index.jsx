@@ -232,7 +232,7 @@ function itemListRender(config) {
         let templeteItem = selectItemType(config.itemType);
         let serviceType = config.data.map((item,index)=>{
             return <div className="acs-servicerequest-type" key={"servicetype"+index}>
-                        <PaginationFrame hasTitle={true} hasSearch={{hasSearch:false,hasDrop:false}} config={{data:item.Items,pageSize:5,frameTitle:item.Title,frameDesc:item.Description}} hasTurning={false}>
+                        <PaginationFrame hasTitle={true} hasSearch={{hasSearch:false,hasDrop:false}} config={{data:item.Items,pageSize:item.Items.length,frameTitle:item.Title,frameDesc:item.Description}} hasTurning={false}>
                             <TableBulk columnCount={config.columnCount} >
                                 {templeteItem}
                             </TableBulk>
