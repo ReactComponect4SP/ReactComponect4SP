@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../../node_modules/react/dist/react.js"></script>
+    <script src="../../node_modules/react-dom/dist/react-dom.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    <link href="../../dist/webparts/tabPage.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="Collapse" class="acs-collapse" style="width: 800px;height:400px;"></div>
+    <div id="aaa" class="acs-tab-content">aaa</div><div id="bbb" class="acs-tab-content">bbb</div><div id="ccc" class="acs-tab-content">ccc</div>
+    <div id="TabPage" class="acs-tagPage" style="width: 800px;height:400px"></div>
+    <script src="../../dist/webparts/tabPage.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){ 
+            var items = {}
+            var config = {divId:"Collapse",
+                        data:[{Title: "aaabbb", Description: "eeefff eeefff eeefff eeefff eeefff eeefff eeefff eeefff ",Items:
+                        [{Href:'http://www.baidu.com',Value:'itemData1'},{Href:'http://www.baidu.com',Value:'itemData1'},
+                        {Href:'http://www.baidu.com',Value:'itemData13'}]},
+                        {Title: "wakaka", Description: "eeefff eeefff eeefff eeefff eeefff eeefff eeefff eeefff ",Items:
+                        [{Href:'http://www.baidu.com',Value:'itemData1'},{Href:'http://www.baidu.com',Value:'itemData1'},
+                        {Href:'http://www.baidu.com',Value:'itemData13'},{Href:'http://www.baidu.com',Value:'itemData14'},
+                        {Href:'http://www.baidu.com',Value:'itemData15'},{Href:'http://www.baidu.com',Value:'itemData16'}]}]}
+            window.collapseRender(config);   
+            var config_1 = {divId:"TabPage"};
+            config_1.items = [{Title:"aaa",Id:"aaa"},{Title:"bbb",Id:"bbb"},{Title:"ccc",Id:"ccc"}];
+            config_1.func = changeStyle;
+            window.tabPageRender(config_1);   
+            changeStyle("aaa");
+        };
+        function changeStyle(id){
+            $('.acs-tab-content').css('display','none');
+            $('#' + id).css('display','block');
+        }
+    </script>
+</body>
+</html>

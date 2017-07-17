@@ -20,7 +20,7 @@ function linksRender(config) {
     let param = { url: '', listurl: '', webparttitle: 'birthday', moreurl: '', id: 'birthdays' };
 
     function renderUI(data, param) {
-        var itemNodes = [];
+        var itemNodes = []; 
         let maxCount = data.length > 9 ? 9 : data.length;        
         itemNodes.push(data.slice(0, maxCount));
         

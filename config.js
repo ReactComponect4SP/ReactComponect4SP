@@ -46,12 +46,12 @@ module.exports = {
             'prod_output_css':''
         },
         {
-            'name': 'newsList',
-            'src': ['webparts/Lists/newsList.jsx'],
-            'style': ['webparts/Lists/style.less'],
+            'name': 'newsListWithPic',
+            'src': ['webparts/Lists/newsListWithPic.jsx'],
+            'style': ['webparts/Lists/styleNewsListWithPic.less'],
             'output': 'dist/webparts',
-            'prod_output_js': '',
-            'prod_output_css':''
+            'prod_output_js': 'AvePointSP2013HomePageLayout/AvePointSP2013HomePageLayout/Style Library/js',
+            'prod_output_css':'AvePointSP2013HomePageLayout/AvePointSP2013HomePageLayout/Style Library/css'
         },
         {
             'name': 'serviceRequest',
@@ -132,7 +132,16 @@ module.exports = {
             'output': 'dist/webparts',
             'prod_output_js': 'APPSSP13IncomeWebparts/APPSSP13IncomeWebparts/Asset/ItemInformation/Script',
             'prod_output_css': 'APPSSP13IncomeWebparts/APPSSP13IncomeWebparts/Asset/ItemInformation/CSS'
+        },
+        {
+            'name': 'TabPage',
+            'src': ['webparts/TabPage/index.jsx'],
+            'style': ['webparts/TabPage/style.less'],
+            'output': 'dist/webparts',
+            'prod_output_js': 'APPSSP13ServiceRequest/APPSSP13ServiceRequest/Module/Script',
+            'prod_output_css':'APPSSP13ServiceRequest/APPSSP13ServiceRequest/Module/CSS'
         }
+
     ],
 
     layouts: [

@@ -1,0 +1,131 @@
+@import "../../stylelibrary/webpartcommon";
+
+.acs-collapse{
+    .acs-collapse-tab{
+        border: 1px solid #ddd;
+        border-top: 2px solid orange;
+        margin-bottom: 20px;
+
+        .acs-collapse-tab-head{
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            color: #888;
+            width: 100%;
+
+            .acs-collapse-icon{
+                width: 9px;
+                height: 9px;
+                margin-left: 15px;
+                background-image:@bgimage_path; 
+                background-position: -5px -310px;
+                vertical-align: middle;
+                display: inline-block;
+                cursor: pointer;
+            }
+            .acs-collapse-icon.in{
+                background-position: -22px -310px;
+            }
+
+            .acs-collapse-title{
+                margin-top: 10px;                
+                margin-left: 10px;
+                display: inline-block;
+               font-family: "Open Sans Semibold","Open Sans", "Sans-serif";
+               text-transform: uppercase;
+               font-weight: bold;
+               cursor: pointer;
+            }
+
+            .acs-collapse-description{
+                margin-left: 30px;
+                font-size: 13px;
+                color: #888;
+                margin-bottom: 10px;
+            }
+        }
+        .acs-collapse-content{
+            width: 100%;
+            transition: height .5s;
+            transition-timing-function: ease;
+            height: 0;
+            overflow: hidden;
+
+            .acs-tablebulk-mutilist{
+                min-height: 20px;
+                width: 100%;
+                padding: 10px 15px 0px 15px;
+
+                .acs-tablebulk-serviceitem{
+                    float: left;
+                    margin-bottom: 10px;
+                    width: 200px;
+
+                    .acs-serviceitem-itemicon{
+                        display: inline-block;
+                        width: 5px;
+                        height: 5px;
+                        background-color: #ffa800;
+                        vertical-align: middle;
+                    }
+
+                    .acs-serviceitem-itemtitle{
+                        margin-left: 10px;
+                        display: inline-block;
+                        width: e('calc(100% - 30px)');
+                        vertical-align: middle;
+                        color: #000;
+                        font-size: 13px;
+                        font-family: "Open Sans", "Sans-serif";
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.acs-tagPage{
+    .acs-section-panel{
+        height: 50px;
+        width: 100%;
+        background: rgb(242, 244, 246);
+        margin-bottom: 30px;
+
+        .acs-tabpage-title-active{
+            background-color: #3ac03c;
+            .acs-tabpage-title-content{
+                color: #fff;
+            }          
+        }
+        .acs-tabpage-title{
+            background-color: transparent;
+            .acs-tabpage-title-content{
+                color: #000;
+            }          
+        }
+        .acs-tabpage-title,.acs-tabpage-title-active{
+            display: inline-block;
+            width: 150px;     
+            cursor: pointer;
+            .acs-tabpage-title-icon{
+                width: 26px;
+                height: 26px;
+                margin-left: 20px;
+                background-image:@bgimage_path; 
+                background-position: -260px -37px;
+                vertical-align: middle;
+                line-height: 50px;
+                display: inline-block;
+            }
+            .acs-tabpage-title-content{
+                margin-left: 10px; 
+                display: inline-block;
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 50px;
+                font-family: "Open Sans Semibold","Open Sans", "Sans-serif";
+            }
+        }
+    }
+
+}
