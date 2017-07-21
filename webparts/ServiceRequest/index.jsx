@@ -2,7 +2,6 @@ import { render } from 'react-dom';
 import PaginationFrame from '../../components/pagination/paginationFrame.jsx';
 import LetterSearchFrame from '../../components/pagination/letterSearchFrame.jsx';
 import TableListFrame from '../../components/table/table.jsx';
-import TableWithCheckboxFrame from '../../components/table/tableWithCheckbox.jsx';
 import TableTemplateFrame from '../../components/table/templateTable.jsx';
 import TableBulk from '../../components/table/tableBulk.jsx';
 

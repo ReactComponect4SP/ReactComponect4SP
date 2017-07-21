@@ -4,7 +4,7 @@ import PanelFrame from '../../components/Common/panelFrame.jsx';
 
 function panelRender(config) {
     let panels = [{
-        title: 'My Task',
+        title: 'My Tasks',
         msgCount: 3,
         iconPosition: '0 -214px',
         url: '#'

@@ -33,6 +33,7 @@ export default class PaginationFrame extends React.Component {
         if(this.refs.jsButton){
             this.refs.jsButton.disabled = true;
         }
+        $("button[id^='ajaxButton']").attr('disabled',true);
     }
 
     changePageSize(size){
@@ -200,11 +201,19 @@ export default class PaginationFrame extends React.Component {
 
     getToDoItems(items,canAction){
         this.state.itemsToDo = items;
-        if(canAction){
-            this.refs.jsButton.disabled = false;            
+        if(this.refs.jsButton){
+            if(canAction){
+                this.refs.jsButton.disabled = false;            
+            }
+            else{
+                this.refs.jsButton.disabled = true;
+            }
         }
-        else{
-            this.refs.jsButton.disabled = true;
+        for(var i=0;i<this.props.config.buttons.length;i++){
+            if(this.props.config.buttons[i].Type == "ajax"){
+                var name = this.props.config.buttons[i].Options.Name;
+                $("button:contains('" + name + "')").attr('disabled', this.state.itemsToDo == "");
+            }
         }
     }
 
@@ -216,7 +225,7 @@ export default class PaginationFrame extends React.Component {
                         </button>
             }
             else{
-                return <AjaxButtonCell itemData={item.Options} tableOperation={this.tableOperation.bind(this)} key={"btn"+index}></AjaxButtonCell>
+                return <AjaxButtonCell itemData={item.Options} tableOperation={this.tableOperation.bind(this)} key={"btn"+index} index={index}></AjaxButtonCell>
             }
         }) ;
     }
