@@ -51,7 +51,7 @@ export default class APP extends React.Component {
             addition = <div className="acs-app-action add" onClick={this.add.bind(this, id)}></div>;
         }
         return (<a className='acs-app-item' draggable={this.candrag} onDragStart={this.dragstart.bind(this, id,type)} 
-                     onDragEnd={this.dragend.bind(this, type)} onSelect={this.select.bind(this)} href={href}>
+                     onDragEnd={this.dragend.bind(this, type)} onSelect={this.select.bind(this)} href={href} target='_blank'>
                 {this.renderImg(src, title)}
                 <span title={title}>{title}</span>   
                 {addition}             
