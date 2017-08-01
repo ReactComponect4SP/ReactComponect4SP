@@ -46,6 +46,11 @@ export default class DisplayGallery extends React.Component {
 
     renderItems(){
         var candrag = this.props.type == "display" ? false:true;
+        this.props.children.sort(function(a, b){
+            if(a.title == b.title){return 0;}
+            if(a.title > b.title){return 1;}
+            if(a.title < b.title){return -1;}
+        })
         var items = this.props.children.map((item)=>{
             return (<App src={item.src} candrag={candrag} title={item.title} href={item.href} type={this.props.type} id={item.id}
             addcallback={this.addcallback.bind(this)} removecallback={this.removecallback.bind(this)}
