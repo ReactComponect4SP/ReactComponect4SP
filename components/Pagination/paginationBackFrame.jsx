@@ -43,7 +43,7 @@ export default class PaginationFrame extends React.Component {
 
     searchFun(cond1,cond2){
         this.state.tempStatus = cond1;
-        this.state.searchinfo = cond2;
+        this.state.searchInfo = cond2;
         this.getEveryPageData(this.props.dataUrl,this.state.tempPageSize,1,this.state.tempStatus,this.state.searchInfo);
     }
 
@@ -133,7 +133,7 @@ export default class PaginationFrame extends React.Component {
                 data:JSON.stringify({pageNumber:pageCount,count:pageSize,searchString:searchinfo,status:status}),
                 success: function (dataInput) {
                     thisReact.setState({
-                        currentItems:dataInput.Itemsw,
+                        currentItems:dataInput.Items,
                         totalCount:dataInput.TotalCount
                     },function(){waitDialog.close(SP.UI.DialogResult.OK);});
                 },
