@@ -1,5 +1,6 @@
 import { render } from 'react-dom';
 import PaginationFrame from '../../components/pagination/paginationFrame.jsx';
+import PaginationBackFrame from '../../components/pagination/paginationBackFrame.jsx';
 import LetterSearchFrame from '../../components/pagination/letterSearchFrame.jsx';
 import TableListFrame from '../../components/table/table.jsx';
 import TableTemplateFrame from '../../components/table/templateTable.jsx';
@@ -13,6 +14,89 @@ import SiteItem from '../../components/table/siteItem.jsx';
 import CheckboxCell from '../../components/table/checkboxCell.jsx';
 
 import $ from 'jquery';
+
+function tableListBackRender(config){
+    const tempConfig = {
+            url: '',
+            debug: true,
+            pageSize: 5,
+            pageCount: 1,
+            divId: config.divId,
+            hasPagination: true,
+            search: { hasSearch: true, hasDrop: true,dropList:[{Value:'All'},{Value:'Open'},{Value:'Pending'}] },
+            hasCheckbox: true,
+            canOperationTable: true,
+            data: {
+               Header:[{Key:'ItemId',Value:"",Width:10},{Key:'RequestType',Value:"Request Type",Width:18},{Key:'RequestDate',Value:"Request Date",Width:18},{Key:'Status',Value:"Status",Width:18},
+                {Key:'ProcessedBy',Value:"Processed By",Width:18},{Key:'ProcessedDate',Value:"Processed Date",Width:18}],
+                Items:[
+                { 'ItemId':'i0001','RequestType': {Title:"11111",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10211' },
+                { 'ItemId':'i0002','RequestType': {Title:"11112",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Pending', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/1021' },
+                { 'ItemId':'i0003','RequestType': "ddddd", 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10421' }
+                ]
+            },
+            buttons: [{Type:"ajax",Options:{ Name: "test", Url: "http://bing.com", Parameter: "requestIds" }},{Type:"js",Options:{ Name: "test", Action:test}}],
+            dropList: [{ Value: 4 }, { Value: 5 }, { Value: 6 }, { Value: 7 }, { Value: 8 }]
+        }
+
+    let param = null;
+    function renderUI(data) {
+        
+        let cellArrary =data.Header.map((item,index)=>{
+            if(index===0 && config.hasCheckbox){
+                return <CheckboxCell selectFun={null}></CheckboxCell>
+            }
+            else{
+                 return <StringCell itemData={null} key={"head"+index}></StringCell>
+            }
+        });
+
+        let tempTable = <TableTemplateFrame hasOrder={config.hasOrder} titleData={data.Header}  listData={data.Items} hasCheckBox={config.hasCheckbox} divModule={config.divId}>
+                        {cellArrary}
+                </TableTemplateFrame>;
+
+        if (document.getElementById(config.divId)) {
+            render(
+                <PaginationBackFrame canChangeSize={config.canChangeSize} hasTitle={false} hasTurning={config.hasPagination} canOperationTable={config.canOperationTable}
+                    hasSearch={{hasSearch:config.search.hasSearch,hasDrop:config.search.hasDrop,dropList:config.search.dropList}} 
+                    config={{data:data.Items,pageSize:config.pageSize,frameTitle:config.tableTitle,dropList:config.dropList,header:data.Header,buttons:config.buttons}} 
+                     dataUrl={config.dataUrl} totalCount={config.totalCount}>
+                   {tempTable}
+                </PaginationBackFrame>,
+                document.getElementById(config.divId)
+            );
+        }
+    }
+
+    function loadData(param) {
+        $.ajax({
+            type: "GET",
+            url: config.url,
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose",
+            },
+            dataType: "json",
+            data: {},
+            cache:false,
+            config: param,
+            async: false,
+            success: function (dataInput) {
+                renderUI(dataInput);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    if(config.isBogusData){
+        config = tempConfig;
+    }
+    renderUI(config.data);
+}
+
+global.tableListBackRender = tableListBackRender;
 
 
 function tableListRender(config){
@@ -54,15 +138,6 @@ function tableListRender(config){
         let tempTable = <TableTemplateFrame hasOrder={config.hasOrder} titleData={data.Header}  listData={data.Items} hasCheckBox={config.hasCheckbox} divModule={config.divId}>
                         {cellArrary}
                 </TableTemplateFrame>;
-        /*
-        let cellArrary =data.Header.map((item,index)=>{
-            return <StringCell itemData={null} key={"head"+index}></StringCell>;
-        })
-        let table1 = <TableListFrame hasOrder={config.hasOrder} titleData={data.Header}  listData={data.Items}>{cellArrary}</TableListFrame>;
-        let table2 = <TableWithCheckboxFrame hasOrder={config.hasOrder} titleData={data.Header}  listData={data.Items} hasCheckBox={config.hasCheckbox} divModule={config.divId}>
-                            <CheckboxCell selectFun={null}></CheckboxCell>{cellArrary}
-                    </TableWithCheckboxFrame>;
-        let tempTable = config.hasCheckbox?table2:table1;*/
 
         if (document.getElementById(config.divId)) {
             render(

@@ -11,22 +11,16 @@ export default class PaginationFrame extends React.Component {
         super(props);
         this.state = {
             nowPage: 1,
-            searchInfo:'',
             currentItems:null,
-            tempTotalItems:null,
             tempPageSize:this.props.config.pageSize,
             itemsToDo:'',
-            tempBackCount:this.props.config.totalCount
+            totalCount:this.props.totalCount,
+            searchInfo:'',
+            tempStatus:''
         };
     }
 
     componentWillMount(){
-        let listData = this.props.config.data.slice(0,this.state.tempPageSize);
-        this.setState({
-            currentItems:listData,
-            tempTotalItems:this.props.config.data,
-
-        })
     }
 
     componentDidMount(){
@@ -38,166 +32,21 @@ export default class PaginationFrame extends React.Component {
 
     changePageSize(size){
         this.state.tempPageSize = parseInt(size);
-        this.state.nowPage = 1;
-        this.setState({
-            currentItems:this.props.config.data.slice(0,parseInt(size))
-        });
+        this.getEveryPageData(this.props.dataUrl,this.state.tempPageSize,1,this.state.tempStatus,this.state.searchInfo);
     }
 
     turnPage(n){
         let pageCount = this.state.nowPage + n;
-        if(this.props.dataInBack){
-            this.getData(pageCount);
-        }
-        else{
-            let startCount = (pageCount-1)*this.state.tempPageSize;
-            let endCount = pageCount*this.state.tempPageSize > this.state.tempTotalItems.length?this.state.tempTotalItems.length:pageCount*this.state.tempPageSize;
-            let listData = this.state.tempTotalItems.slice(startCount,endCount);
-            this.state.nowPage = pageCount;
-            this.setState({nowPage:pageCount,currentItems:listData});
-        }
+        this.getEveryPageData(this.props.dataUrl,this.state.tempPageSize,pageCount,this.state.tempStatus,this.state.searchInfo);
+        this.setState({nowPage:pageCount});
     }
 
     searchFun(cond1,cond2){
-        if(cond1!==''){
-            this.hasDropSearch(cond1,cond2);
-        }
-        else{
-            this.noDropSearch(cond2);
-        }
+        this.state.tempStatus = cond1;
+        this.state.searchinfo = cond2;
+        this.getEveryPageData(this.props.dataUrl,this.state.tempPageSize,1,this.state.tempStatus,this.state.searchInfo);
     }
 
-    hasDropSearch(cond1,cond2){
-        let tempData = this.props.config.data;
-        let searchResultFirst = [],searchResultSecond = [],finalResult=[];
-        tempData.map((item)=>{
-            if(item['Status'] === cond1){
-                searchResultFirst.push(item);
-            }
-        })
-        if(cond2!==''){
-            if(!this.props.searchInBack){
-                finalResult = this.searchInFFCode(searchResultFirst,cond2);
-            }
-            else{
-                this.searchInBGCode(cond2);
-                return;
-            }
-        }
-        else{
-            finalResult = searchResultFirst;
-        }
-        this.setState({
-            currentItems:finalResult.slice(0,this.state.tempPageSize),
-            tempTotalItems:finalResult,
-            nowPage:1
-        });
-    }
-
-    noDropSearch(cond2){
-        let tempData = this.props.config.data,header = this.props.config.header;
-        let searchResultFirst = [],searchResultSecond = [],finalResult=[];
-        if(cond2 === ''){
-            finalResult = tempData;
-            if(this.props.dataInBack){
-                this.state.tempBackCount = this.props.config.totalCount;
-            }
-        }
-        else{
-            if(!this.props.searchInBack){
-                finalResult = this.searchInFFCode(tempData,cond2);
-            }
-            else{
-                this.searchInBGCode(cond2);
-                return;
-            }
-        }
-        this.setState({
-            currentItems:finalResult.slice(0,this.state.tempPageSize),
-            tempTotalItems:finalResult,
-            nowPage:1
-        });
-    }
-
-    searchInFFCode(listData,condition){
-        let tempList = [];
-        let header = this.props.config.header;
-        if(header === null || header.length === 0){
-            header = ["Title","Description"];
-        }
-        listData.map((item)=>{
-            for(var i = 0;i<header.length;i++){
-                if(item[header[i].Key] === null){
-                    continue;
-                }
-                var tempItem = typeof item[header[i].Key] === "object"?item[header[i].Key].Title:item[header[i].Key];
-                if(tempItem.toString().toLowerCase().indexOf(condition.toLowerCase()) !== -1){
-                    tempList.push(item);
-                    break;
-                }
-            }
-        });
-        return tempList;
-    }
-
-    searchInBGCode(condition){
-        // let finalUrl = this.config.url + "?condition="+condition;
-        // $.ajax({
-        //     type: "GET",
-        //     url: finalUrl,
-        //     headers: {
-        //         "Accept": "application/json;odata=verbose",
-        //         "Content-Type": "application/json;odata=verbose",
-        //     },
-        //     dataType: "json",
-        //     cache:false,
-        //     async: false,
-        //     success: function (dataInput) {
-        //          this.setState({
-        //             currentItems:dataInput.slice(0,this.state.tempPageSize),
-        //             tempTotalItems:dataInput,
-        //             nowPage:1
-        //         });
-        //     },
-        //     error: function (error) {
-        //         console.log(error);
-        //     }
-        // });
-        var tempConfig = this.props.config , reactThis = this;
-        var filterObj={
-            PageNo: 1,
-            PageSize: tempConfig.pageSize
-        };
-        $.when(AvePointSocialRequest.GetSharedDocument(1, tempConfig.pageSize, condition)).done(function(dataInput){
-            reactThis.setState(
-                {currentItems:dataInput.allItem.slice(0,reactThis.state.tempPageSize),
-                 tempTotalItems:dataInput.allItem,   
-                 nowPage:1,
-                tempBackCount:dataInput.count}
-            );
-        }).fail(function(){
-
-        })
-    }
-
-    letterFun(letter){
-        let tempList = [];
-        if(letter === "ALL"){
-            tempList = this.props.config.data;
-        }
-        else{
-            this.props.config.data.map((item)=>{
-                if(item.Name.toUpperCase().indexOf(letter) === 0){
-                    tempList.push(item);
-                }
-            });
-        }
-        this.setState({
-            currentItems:tempList.slice(0,this.state.tempPageSize),
-            tempTotalItems:tempList,
-            nowPage:1
-        })
-    }
 
     getToDoItems(items,canAction){
         this.state.itemsToDo = items;
@@ -265,21 +114,34 @@ export default class PaginationFrame extends React.Component {
         }
     }
 
-    getData(pageCount){
-        var tempConfig = this.props.config , reactThis = this;
-        var filterObj={
-            PageNo: pageCount,
-            PageSize: tempConfig.pageSize
-        };
-        $.when(AvePointSocialRequest.GetSharedDocument(pageCount, tempConfig.pageSize)).done(function(data){
-            reactThis.setState(
-                {currentItems:data.allItem,
-                nowPage:pageCount}
-            );
-        }).fail(function(){
 
-        })
-        
+    getEveryPageData(url,pageSize,pageCount,status,searchinfo){
+        let finalUrl = url + "?pageSize="+pageSize+"&pageCount="+pageCount+"&status="+status+"&searchinfo="+searchinfo;
+        let thisReact = this;
+         EnsureScriptFunc("SP.UI.Dialog.js", "SP.UI.ModalDialog.showModalDialog", function () {
+            var waitDialog = SP.UI.ModalDialog.showWaitScreenWithNoClose("Loading..."); 
+            $.ajax({
+                type: "GET",
+                url: finalUrl,
+                headers: {
+                    "Accept": "application/json;odata=verbose",
+                    "Content-Type": "application/json;odata=verbose",
+                },
+                dataType: "json",
+                cache:false,
+                async: false,
+                success: function (dataInput) {
+                    thisReact.setState({
+                        currentItems:dataInput.Itemsw,
+                        totalCount:dataInput.TotalCount
+                    },function(){waitDialog.close(SP.UI.DialogResult.OK);});
+                },
+                error: function (error) {
+                    console.log(error);
+                    waitDialog.close(SP.UI.DialogResult.OK);
+                }
+            });
+        });
     }
 
     render() {
@@ -290,10 +152,9 @@ export default class PaginationFrame extends React.Component {
             selectItems:this.getToDoItems.bind(this)
         });
 
-        let totalcount = this.props.dataInBack?this.state.tempBackCount:this.state.tempTotalItems.length;
         child = hasLetterSearch?<LetterSearchFrame letterSearch={this.letterFun.bind(this)}>{child} </LetterSearchFrame>:child;
 
-        let turningPanel = hasTurning?<PaginationArrows turnPage={this.turnPage.bind(this)} currentPage={currentpage} countInPage={this.state.tempPageSize} totalCount={totalcount}></PaginationArrows>:null;
+        let turningPanel = hasTurning?<PaginationArrows turnPage={this.turnPage.bind(this)} currentPage={currentpage} countInPage={this.state.tempPageSize} totalCount={this.state.totalCount}></PaginationArrows>:null;
         let dataFrame = hasTitle?<PaginationDataFrame frameTitle={config.frameTitle} frameDesc={config.frameDesc}>{child}</PaginationDataFrame>:<div>{child}</div>;
         let searchPanel = hasSearch.hasSearch?<PaginationSearch hasDrop={hasSearch.hasDrop} searchFun={this.searchFun.bind(this)} dropList={hasSearch.dropList}></PaginationSearch>:null;
         let tableOperation = <div className="acs-turningframe-operation">
