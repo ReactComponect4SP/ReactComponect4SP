@@ -11,7 +11,7 @@ export default class PaginationFrame extends React.Component {
         super(props);
         this.state = {
             nowPage: 1,
-            currentItems:null,
+            currentItems:this.props.config.data,
             tempPageSize:this.props.config.pageSize,
             itemsToDo:'',
             totalCount:this.props.totalCount,
@@ -121,8 +121,8 @@ export default class PaginationFrame extends React.Component {
          EnsureScriptFunc("SP.UI.Dialog.js", "SP.UI.ModalDialog.showModalDialog", function () {
             var waitDialog = SP.UI.ModalDialog.showWaitScreenWithNoClose("Loading..."); 
             $.ajax({
-                type: "GET",
-                url: finalUrl,
+                type: "POST",
+                url: url,
                 headers: {
                     "Accept": "application/json;odata=verbose",
                     "Content-Type": "application/json;odata=verbose",
@@ -130,6 +130,7 @@ export default class PaginationFrame extends React.Component {
                 dataType: "json",
                 cache:false,
                 async: false,
+                data:JSON.stringify({pageNumber:pageCount,count:pageSize,searchString:searchinfo,status:status}),
                 success: function (dataInput) {
                     thisReact.setState({
                         currentItems:dataInput.Itemsw,

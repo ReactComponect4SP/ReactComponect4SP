@@ -60,7 +60,7 @@ function tableListBackRender(config){
                 <PaginationBackFrame canChangeSize={config.canChangeSize} hasTitle={false} hasTurning={config.hasPagination} canOperationTable={config.canOperationTable}
                     hasSearch={{hasSearch:config.search.hasSearch,hasDrop:config.search.hasDrop,dropList:config.search.dropList}} 
                     config={{data:data.Items,pageSize:config.pageSize,frameTitle:config.tableTitle,dropList:config.dropList,header:data.Header,buttons:config.buttons}} 
-                     dataUrl={config.dataUrl} totalCount={config.totalCount}>
+                     dataUrl={config.url} totalCount={data.TotalCount}>
                    {tempTable}
                 </PaginationBackFrame>,
                 document.getElementById(config.divId)
@@ -70,7 +70,7 @@ function tableListBackRender(config){
 
     function loadData(param) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: config.url,
             headers: {
                 "Accept": "application/json;odata=verbose",
