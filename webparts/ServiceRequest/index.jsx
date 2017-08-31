@@ -110,6 +110,7 @@ function tableListRender(config){
             search: { hasSearch: true, hasDrop: true,dropList:[{Value:'All'},{Value:'Open'},{Value:'Pending'}] },
             hasCheckbox: true,
             canOperationTable: true,
+            openTab: false,
             data: {
                Header:[{Key:'ItemId',Value:"",Width:10},{Key:'RequestType',Value:"Request Type",Width:18},{Key:'RequestDate',Value:"Request Date",Width:18},{Key:'Status',Value:"Status",Width:18},
                 {Key:'ProcessedBy',Value:"Processed By",Width:18},{Key:'ProcessedDate',Value:"Processed Date",Width:18}],
@@ -131,7 +132,7 @@ function tableListRender(config){
                 return <CheckboxCell selectFun={null}></CheckboxCell>
             }
             else{
-                 return <StringCell itemData={null} key={"head"+index}></StringCell>
+                 return <StringCell openTab={config.openTab} itemData={null} key={"head"+index}></StringCell>
             }
         });
 
