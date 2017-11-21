@@ -7,6 +7,7 @@ import TableTemplateFrame from '../../components/table/templateTable.jsx';
 import TableBulk from '../../components/table/tableBulk.jsx';
 
 import StringCell from '../../components/table/stringCell.jsx';
+import ButtonCell from '../../components/table/buttonCell.jsx';
 import ServiceItem from '../../components/table/serviceItem.jsx';
 import LyncItem from '../../components/table/lyncHeadCell.jsx';
 import DocumentItem from '../../components/table/documentItem.jsx';
@@ -107,17 +108,18 @@ function tableListRender(config){
             pageCount: 1,
             divId: config.divId,
             hasPagination: true,
-            search: { hasSearch: true, hasDrop: true,dropList:[{Value:'All'},{Value:'Open'},{Value:'Pending'}] },
-            hasCheckbox: true,
-            canOperationTable: true,
+            search: { hasSearch: false, hasDrop: true,dropList:[{Value:'All'},{Value:'Open'},{Value:'Pending'}] },
+            hasCheckbox: false,
+            canOperationTable: false,
             openTab: false,
+            hasCellButton:true,
             data: {
                Header:[{Key:'ItemId',Value:"",Width:10},{Key:'RequestType',Value:"Request Type",Width:18},{Key:'RequestDate',Value:"Request Date",Width:18},{Key:'Status',Value:"Status",Width:18},
-                {Key:'ProcessedBy',Value:"Processed By",Width:18},{Key:'ProcessedDate',Value:"Processed Date",Width:18}],
+                {Key:'ProcessedBy',Value:"Processed By",Width:18},{Key:'ProcessedDate',Value:"Processed Date",Width:10},{Key:'ItemAction',Value:"Item Action",Width:8}],
                 Items:[
-                { 'ItemId':'i0001','RequestType': {Title:"11111",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10211' },
-                { 'ItemId':'i0002','RequestType': {Title:"11112",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Pending', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/1021' },
-                { 'ItemId':'i0003','RequestType': "ddddd", 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10421' }
+                { 'ItemId':'i0001','RequestType': {Title:"11111",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10211','ItemAction':{Name:'ddd',Action:'function(){alert(\'d\');}'} },
+                { 'ItemId':'i0002','RequestType': {Title:"11112",Href:"http://www.baidu.com"}, 'RequestDate': '9/3/1021', 'Status': 'Pending', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/1021','ItemAction':{Name:'ddd',Action:'function(){alert(\'d\');}'} },
+                { 'ItemId':'i0003','RequestType': "ddddd", 'RequestDate': '9/3/1021', 'Status': 'Open', 'ProcessedBy': 'Bill','ProcessedDate':'9/3/10421','ItemAction':{Name:'ddd',Action:'function(){alert(\'d\');}'} }
                 ]
             },
             buttons: [{Type:"ajax",Options:{ Name: "test", Url: "http://bing.com", Parameter: "requestIds" }},{Type:"js",Options:{ Name: "test", Action:test}}],
@@ -126,14 +128,17 @@ function tableListRender(config){
 
     let param = null;
     function renderUI(data) {
-        
         let cellArrary =data.Header.map((item,index)=>{
             if(index===0 && config.hasCheckbox){
                 return <CheckboxCell selectFun={null}></CheckboxCell>
+            }else if(index===data.Header.length -1 && config.hasCellButton){
+                return <ButtonCell openTab={config.openTab} itemData={null} key={"head"+index}></ButtonCell>;
             }
             else{
-                 return <StringCell openTab={config.openTab} itemData={null} key={"head"+index}></StringCell>
+                return <StringCell openTab={config.openTab} itemData={null} key={"head"+index}></StringCell>;
             }
+            
+            
         });
 
         let tempTable = <TableTemplateFrame hasOrder={config.hasOrder} titleData={data.Header}  listData={data.Items} hasCheckBox={config.hasCheckbox} divModule={config.divId}>
