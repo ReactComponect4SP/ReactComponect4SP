@@ -88,7 +88,7 @@ gulp.task('copy-jslibrary', function () {
     return;
 })
 
-gulp.task('concat-js', ['buildjs-wp', 'buildjs-layout', 'buildjs-webglobal', 'copy-jslibrary'], function () {
+gulp.task('concat-js', ['buildjs-wp'], function () {
     if (!debug) {
         for (let concat of config.concats) {
             let srcs = concat.src.map(function (item) {

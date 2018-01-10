@@ -7,9 +7,12 @@ function sliderRender(config) {
 
     let data = [{ 'src': '../../components/img/image1.jpg', 'alt': 'image1', 'itemhref': 'www.baidu.com', 'title': 'aaa', 'description': 'aaa description' },
     { 'src': '../../components/img/image2.jpg', 'alt': 'image2', 'itemhref': 'www.sina.com.cn', 'title': 'bbb', 'description': '' },
-    { 'src': '../../components/img/image3.jpg', 'alt': 'image3', 'itemhref': 'www.sohu.com', 'title': '', 'description': 'desc2' }];
+    { 'src': '../../components/img/image3.jpg', 'alt': 'image3', 'itemhref': 'www.sohu.com', 'title': '', 'description': 'desc2' },
+    { 'src': '../../components/img/image4.jpg', 'alt': 'image4', 'itemhref': 'www.sohu.com', 'title': '', 'description': 'desc2' },
+    { 'src': '../../components/img/image5.jpg', 'alt': 'image5', 'itemhref': 'www.sohu.com', 'title': '', 'description': 'desc2' },
+    { 'src': '../../components/img/image6.jpg', 'alt': 'image6', 'itemhref': 'www.sohu.com', 'title': '', 'description': 'desc2' }];
 
-    let param = { url: '', speed: 1, delay: 1, pause: true, autoplay: false, dots: true, arrows: true, listurl: '' };
+    let param = { url: '', speed: 2000, delay: 1, pause: true, autoplay: false, dots: true, arrows: true, listurl: '' };
 
     function renderUI(data, param) {
         if (document.getElementById('slider')) {
@@ -27,7 +30,7 @@ function sliderRender(config) {
                 </SliderFrame>,
                 document.getElementById('slider')
             );
-            AIC.wordLimit('.acs-titledescriptionpanel-description', 2);
+            //AIC.wordLimit('.acs-titledescriptionpanel-description', 2);
         }
     }
 
@@ -64,7 +67,7 @@ function sliderRender(config) {
     }
 
     if (config && !config.debug) {
-        param.speed = config.speed ? config.speed : 1;
+        param.speed = config.speed ? config.speed : 2000;
         param.delay = config.delay ? config.delay : 1;
         param.pause = config.pause ? config.pause : true;
         param.autoplay = config.autoplay ? config.autoplay : false;

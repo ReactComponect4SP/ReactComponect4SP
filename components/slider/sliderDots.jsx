@@ -11,7 +11,8 @@ export default class SliderDots extends React.Component {
     render() {
         let dotNodes = [];
         let { count, nowLocal } = this.props;
-        for (let i = 0; i < count; i++) {
+
+        for (let i = 1; i < count + 1; i++) {
             dotNodes[i] = (
                 <span
                     key={'dot' + i}
